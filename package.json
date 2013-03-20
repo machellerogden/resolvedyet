@@ -1,0 +1,25 @@
+{
+    "name": "resolvedyet",
+    "description": "realtime dns monitor",
+    "author": "Mac Heller-Ogden <mac@machellerogden.com>",
+    "version": "0.0.1",
+    "scripts": {
+        "start": "node app"
+    },
+    "dependencies": {
+        "express": "3.0.6",
+        "jade": "*",
+        "stylus": "*",
+        "nib": "0.9.1",
+        "underscore": "1.4.3",
+        "async": "0.1.22",
+        "request": "2.12.0",
+        "socket.io": "0.9.13",
+        "moment": "1.7.2"
+    },
+    "files": [
+        "app.js",
+        "app/"
+    ],
+    "engine": "node >= 0.8.18"
+}

@@ -1,0 +1,308 @@
+@import 'nib'
+global-reset()
+dark = #2f2e33
+light = #e2e1e9
+darkpurple = rgb(88, 75, 134)
+midpurple = #868391
+brightpurple = #5d5396
+midgreen = #a1b901
+fonts = "Helvetica Neue", Helvetica, sans-serif
+rounded = 10px
+body
+    font 14px fonts
+a
+    color midgreen
+#wrapper
+    text-align center
+.column
+    width 960px
+    max-width 90%
+    margin 0 auto
+#main
+    padding 30px
+    text-align left
+    form
+        font-size 20px
+        font-weight 300
+        line-height 60px
+        height 60px
+        border-width 0
+        border-style none
+        border-radius rounded
+        padding 10px 0px 15px 30px
+        margin-bottom 30px
+        background linear-gradient(top,#fbfbfb 0%,#f1eff5 100%)
+        box-shadow rgba(0,0,0,0.55) 0 3px 5px
+        label,
+        input
+            vertical-align middle
+            font-size 24px
+            outline none
+        label
+            color midpurple
+            display none
+        input
+            color dark
+            font-weight 200
+            border-width 2px
+            border-color #fff
+            border-style solid
+            border-radius rounded
+            background linear-gradient(top,#e2e0e9 0%,#f3f2f6 50%,#f3f2f6 100%)
+            padding 8px 10px
+            margin-left 15px
+            width 83%
+            font-family fonts
+            letter-spacing 1px
+        input:focus
+            border-color darkpurple
+        input::-moz-placeholder,
+        input::-webkit-input-placeholder,
+        input::-ms-input-placeholder
+            color midpurple  
+#content-domainquery
+    position relative
+    height 60px
+    margin 0 0 10px 0
+#content
+    margin 0 0 10px 0
+    h2
+        font-size 24px
+        margin 0 0 4px 0
+    h3
+        font-size 18px
+        margin 10px 0 4px 0
+        text-transform uppercase
+    em
+        font-style italic
+        color #555
+    strong
+        font-weight 600
+        color brightpurple
+    p
+        line-height 1.825
+    li
+        line-height 1.825
+    ul,
+    ol
+        margin 10px 20px 10px 40px
+    ul
+        li
+            list-style-type disc
+    ol
+        li
+            list-style-type lower-alpha
+            li
+                list-style-type lower-roman
+#legend
+    text-align left
+    width 360px
+    height 60px
+    margin 0 0 0 80px
+    absolute top 0 left 0
+    h3
+        absolute top 18px left 0 
+        text-transform uppercase
+        color midpurple
+        font-size 20px
+        font-weight 300
+    .legend-box
+        absolute top 0 right 0 
+        height 60px
+        width 260px
+        background linear-gradient(top,#e4e2eb 0%,#f7f6f9 50%,#f7f6f9 100%)
+        border-radius rounded
+        .legend-item
+            margin 9px 13px 0
+        .key
+            height 10px
+            width 40px
+            margin-top 3px
+            margin-right 10px
+            float left
+            border-radius rounded
+            box-shadow rgba(0,0,0,0.55) 0 2px 4px
+            background linear-gradient(top,#9e94cc 0%,#271e69 100%)
+        .label
+            color dark
+        .changed
+            .key
+                background linear-gradient(top,#cbd904 0%,#688800 100%)
+#about
+    text-align left
+    width 220px
+    height 60px
+    margin 4px 40px 0 0
+    absolute top 0 right 0
+    font-size 13px
+    font-weight 200
+    letter-spacing 1px
+    color midpurple
+    strong
+        font-weight 600
+        color brightpurple
+    p
+        line-height 1.825
+#header
+    text-align center
+    width 100%
+    padding 30px 0
+    background linear-gradient(top, #111 0%, dark 60%, dark 100%)
+    color midpurple
+    h1
+        font-size 46px
+        font-weight 100
+        letter-spacing 8px
+    span
+        color midgreen
+
+ul#results
+    li
+        margin 30px 0 5px
+        border-width 0
+        border-top-width 1px
+        border-color light
+        border-style solid
+        padding 20px 0 0
+        h2
+            font-size 26px
+            font-weight 200
+            color dark
+            margin-bottom 14px
+            letter-spacing 1px
+            span
+                color midgreen
+                text-transform uppercase
+        h3
+            font-size 14px
+            font-weight 600
+            color dark
+            letter-spacing 1px
+            text-transform uppercase
+            margin 18px 0 6px
+        span.listing
+            display block
+            font-size 18px
+            font-weight 300
+            background linear-gradient(top,#9e94cc 0%,#271e69 100%)
+            padding 8px 8px 12px
+            color white
+            text-shadow black 0 2px 4px
+            border-radius rounded
+            box-shadow rgba(0,0,0,0.55) 0 3px 5px
+            white-space nowrap
+            overflow hidden
+            text-overflow ellipsis
+            position relative
+            span.indicator-outer
+                absolute top 12px left 9px
+                height 18px
+                width 18px
+                background linear-gradient(top, #281f6a 0%, #998ec8 100%);
+                border-radius 9px
+            span.indicator-inner
+                absolute top 2px left 2px
+                height 14px
+                width 14px
+                background linear-gradient(top, #ebe9f2 0%, #b5afcb 100%);
+                border-radius 7px
+            span.text
+                margin-left 34px
+                vertical-align middle
+        span.listing.changed
+            background linear-gradient(top,#cbd904 0%,#688800 100%)
+            span.indicator-outer
+                background linear-gradient(top, #688800 0%, #c3d933 100%);
+            span.indicator-inner
+                background linear-gradient(top, #f7ff9a 0%, #e3fd2b 100%);
+        span.status
+            display block
+            text-align left
+            font-weight 200
+            border-radius rounded
+            background linear-gradient(top,#e2e0e9 0%,#f3f2f6 50%,#f3f2f6 100%)
+            padding 8px 10px
+            margin 25px 0 20px
+            span.label
+                font-weight bold
+                text-transform uppercase
+            span.meta
+                color midpurple
+                font-weight 300
+                margin-top 16px
+#footer
+    text-align center
+    margin 20px 30px
+    p
+        font-size 13px
+        color #bbb
+    a
+        color midgreen
+        text-decoration none
+    a:hover
+        text-decoration underline
+
+@media all and (min-width: 640px)
+    #main form label
+        display inline
+
+@media (max-width: 640px)
+    #main form input
+        margin-left -15px
+        width 90%
+        font-size 12px
+        font-weight bold
+        padding-top 12px
+        padding-bottom 12px
+    #legend
+        relative top 0 left 0
+        margin 15px auto
+        h3
+            font-size 15px
+        .legend-box
+            width 220px
+            right 15%
+            .label
+                font-size 11px
+    #about
+        relative top 0 left 0
+        text-align center
+        width 100%
+    #content-domainquery
+        height auto
+        
+@media (min-width: 641px) and (max-width: 895px)
+    #main form input
+        width 75%
+        font-size 15px
+        font-weight bold
+        padding-top 14px
+        padding-bottom 14px
+    #legend
+        relative top 0 left 0
+        margin 15px auto
+        h3
+            font-size 16px
+        .legend-box
+            width 220px
+            right 15%
+            .label
+                font-size 11px
+    #about
+        relative top 0 left 0
+        text-align center
+        width 100%
+    #content-domainquery
+        height auto
+
+@media (min-width: 895px)
+    #main form input
+        background url('/images/icon-watermark-enter.png') 99% 50% no-repeat, linear-gradient(top,#e2e0e9 0%,#f3f2f6 50%,#f3f2f6 100%)
+
+@media (min-width: 1100px)
+    #main form input
+        width 790px
+        background url('/images/icon-watermark-enter.png') 99% 50% no-repeat, linear-gradient(top,#e2e0e9 0%,#f3f2f6 50%,#f3f2f6 100%)
+    #about
+        width 360px
+        margin 4px 80px 0 0

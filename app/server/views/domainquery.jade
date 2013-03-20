@@ -1,0 +1,62 @@
+extends layout
+
+block header
+    h1
+        | Has My Domain 
+        span
+            | Resolved Yet?
+
+block content
+    form(data-bind="submit: getRecords")
+        label(for="domain") http://
+        input#domain(type="text",placeholder="Enter your domain name (i.e. google.com)",name="domain",data-bind="value: domainQuery, valueUpdate: 'afterkeydown'")
+    #content-domainquery
+        #legend
+            h3 Legend: 
+            .legend-box
+                .legend-item.unchanged
+                    .key
+                    .label
+                        | Unchanged Since Load
+                .legend-item.changed
+                    .key
+                    .label
+                        | Changed Since Load
+        #about
+            p
+                | Enter the domains you want to monitor, one at a time. 
+                strong Each result will be updated every 150 seconds.
+    ul#results.list.data-list(data-bind="foreach: allResults")
+        li
+            h2
+                | Monitoring 
+                span(data-bind="text: domain")
+                |  For DNS Changes
+            h3
+                | Name Servers
+            span.listing(data-bind="attr: {class: nscls}")
+                span.indicator-outer
+                  span.indicator-inner
+                span.text.ns(data-bind="text: nameserverText")
+            h3
+                | A Records
+            span.listing(data-bind="attr: {class: acls}")
+                span.indicator-outer
+                  span.indicator-inner
+                span.text.a(data-bind="text: arecordsText")
+            h3
+                | CNAME Records
+            span.listing(data-bind="attr: {class: ccls}")
+                span.indicator-outer
+                  span.indicator-inner
+                span.text.cname(data-bind="text: crecordsText")
+            h3
+                | MX Records
+            span.listing(data-bind="attr: {class: mxcls}")
+                span.indicator-outer
+                  span.indicator-inner
+                span.text.mx(data-bind="text: mxrecordsText")
+            span.status
+                span.label
+                    | Status: 
+                span.meta(data-bind="text: meta")
