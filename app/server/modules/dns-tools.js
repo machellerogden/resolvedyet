@@ -1,6 +1,6 @@
 
 /*
- * DNS Socketware
+ * DNS Tools
  */
 
 (function(){
@@ -29,70 +29,44 @@
 
 
         dnstools.startMonitor = function (domain) {
+
             var socket = this,
                 isConnected = function () { return socket.connected; },
                 updateClient = function () { socket.emit('updatedrecords', records); },
-                getNs = function () {
+                getNs, getA, getCname, getMx, doResolve;
+
+            function getRecords(type, reference) {
+                var method = (type === 'NS') ? 'resolveNs' : 'resolve';
+                return function () {
                     return Deferred(function(dfd){
-                        dns.resolveNs(domain, function(err, nameservers){
-                            if ( (!err) && (typeof nameservers !== 'undefined') ) {
-                                records.nameservers = nameservers;
+                        dns[method](domain, function(err, results){
+                            if ( (!err) && (typeof results !== 'undefined') ) {
+                                records[reference] = results;
                             } else {
-                                records.nameservers = ["No Records"];
+                                records[reference] = ["No Records"];
                             }
-                            records.nameservers.sort();
+                            records[reference].sort();
                             dfd.resolve();
                         });
                     }).promise();
-                },
-                getA = function () {
-                    return Deferred(function(dfd){
-                        dns.resolve(domain, 'A', function (err, arecords){
-                            if ( (!err) && (typeof arecords !== 'undefined') ) {
-                                records.arecords = arecords;
-                            } else {
-                                records.arecords = ["No Records"];
-                            }
-                            records.arecords.sort();
-                            dfd.resolve();
-                        });
-                    }).promise();
-                },
-                getCname = function () {
-                    return Deferred(function(dfd){
-                        dns.resolve(domain, 'CNAME', function (err, crecords){
-                            if ( (!err) && (typeof crecords !== 'undefined') ) {
-                                records.crecords = crecords;
-                            } else {
-                                records.crecords = ["No Records"];
-                            }
-                            records.crecords.sort();
-                            dfd.resolve();
-                        });
-                    }).promise();
-                },
-                getMx = function () {
-                    return Deferred(function(dfd){
-                        dns.resolve(domain, 'MX', function (err, mxrecords){
-                            if ( (!err) && (typeof mxrecords !== 'undefined') ) {
-                                records.mxrecords = mxrecords;
-                            } else {
-                                records.mxrecords = ["No Records"];
-                            }
-                            records.mxrecords.sort();
-                            dfd.resolve();
-                        });
-                    }).promise();
-                },
-                doResolve = function (callback) {
-                    Deferred.when(getNs(), getA(), getCname(), getMx())
-                            .done(updateClient)
-                            .fail(function(){
-                                console.log('trouble!');
-                            });
-                    // wait 2.5 mins between requests
-                    setTimeout(callback, 150000);
                 };
+            }
+
+            getNs = getRecords('NS','nameservers');
+            getA = getRecords('A','arecords');
+            getCname = getRecords('CNAME','crecords');
+            getMx = getRecords('MX','mxrecords');
+
+            function doResolve (callback) {
+                Deferred.when(getNs(), getA(), getCname(), getMx())
+                        .done(updateClient)
+                        .fail(function(){
+                            console.log('trouble!');
+                        });
+                // wait 2.5 mins between requests
+                setTimeout(callback, 150000);
+            }
+
             if (domain) {
                 records.domain = domain;
                 async.whilst(
