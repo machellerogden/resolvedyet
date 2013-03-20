@@ -8,9 +8,7 @@
     var _ = require('underscore'),
         async = require('async'),
         Deferred = require('JQDeferred'),
-        request = require('request'),
-        dns = require('dns'),
-        moment = require('moment');
+        dns = require('dns');
 
     function DnsTools() {
 

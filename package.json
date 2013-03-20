@@ -17,9 +17,7 @@
         "nib": "0.9.1",
         "underscore": "1.4.3",
         "async": "0.1.22",
-        "request": "2.12.0",
         "socket.io": "0.9.13",
-        "moment": "1.7.2",
         "JQDeferred": "1.9.0"
     },
     "files": [
