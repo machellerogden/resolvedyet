@@ -1,6 +1,6 @@
 {
     "name": "resolvedyet",
-    "description": "realtime dns monitor",
+    "description": "Realtime DNS Monitor built on Express and Socket.io",
     "author": "Mac Heller-Ogden <mac@machellerogden.com>",
     "version": "0.0.1",
     "scripts": {
