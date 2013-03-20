@@ -5,14 +5,14 @@ var express = require('express'),
 
 app.root = __dirname;
 
-// global socket.io instance
+// socket.io instance
 app.io = require('socket.io').listen(server);
 app.io.set('log level', 1);
 app.io.set('transports', [ 'websocket', 'flashsocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
 
 require(app.root + '/app/config')(app);
 require(app.root + '/app/server/router')(app);
-require(app.root + '/app/server/modules/dns-events')(app);
+require(app.root + '/app/server/modules/dns-events')(app.io);
 
 // start server
 server.listen(8080);

@@ -20,6 +20,7 @@ var DomainsViewModel = function () {
             key = ($.indexOf(this.allDomains(), result.domain)),
             now = $.moment().format('h:mma');
 
+        // make sure domain isn't already being monitored
         if (key !== -1) {
 
             var current = results[key],

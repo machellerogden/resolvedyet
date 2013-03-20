@@ -3,11 +3,11 @@
  * DNS Socket Events
  */
 
-module.exports = function(app){
+module.exports = function(io){
 
     var dnstools = require('./dns-tools');
 
-    app.io.of('/resolvedyet').on('connection', function (socket) {
+    io.of('/resolvedyet').on('connection', function (socket) {
         socket.on('startmonitor', dnstools.startMonitor);
         socket.on('connect', dnstools.connect);
         socket.on('disconnect', dnstools.disconnect);
