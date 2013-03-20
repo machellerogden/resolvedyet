@@ -9,8 +9,8 @@ var DomainsViewModel = function () {
 
     this.allResults = $.observableArray([]); 
 
-    this.getRecords = function () {
-        socket.emit('getrecords',this.domainQuery());
+    this.startMonitor = function () {
+        socket.emit('startmonitor', this.domainQuery());
     };
 
     this.addResult = function () {
@@ -146,7 +146,7 @@ $.domReady(function () {
     });
 
     // updated results received
-    socket.on('updatedresult', function(result) {
+    socket.on('updatedrecords', function(result) {
         domains.resultToAdd(result);
         domains.addResult();
         $('#domain').get(0).focus();

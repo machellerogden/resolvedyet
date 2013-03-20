@@ -7,7 +7,7 @@ block header
             | Resolved Yet?
 
 block content
-    form(data-bind="submit: getRecords")
+    form(data-bind="submit: startMonitor")
         label(for="domain") http://
         input#domain(type="text",placeholder="Enter your domain name (i.e. google.com)",name="domain",data-bind="value: domainQuery, valueUpdate: 'afterkeydown'")
     #content-domainquery
