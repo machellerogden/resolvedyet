@@ -3,6 +3,10 @@
     "description": "Realtime DNS Monitor built on Express and Socket.io",
     "author": "Mac Heller-Ogden <mac@machellerogden.com>",
     "version": "0.0.1",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/pixeldreamer/resolvedyet.git"
+    },
     "scripts": {
         "start": "node app"
     },
