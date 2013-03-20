@@ -30,8 +30,7 @@ var DomainsViewModel = function () {
                 ra = result.arecords.join(', '),
                 cc = current.crecords.join(', '),
                 rc = result.crecords.join(', '),
-                cm,
-                rm;
+                cm, rm;
 
             if ( $.isString(current.mxrecords[0]) ) {
                 cm = current.mxrecords[0];
