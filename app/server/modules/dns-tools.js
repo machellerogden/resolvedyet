@@ -27,14 +27,14 @@
             socket.connected = false;
         };
 
-
         dnstools.startMonitor = function (domain) {
 
             var socket = this,
                 isConnected = function () { return socket.connected; },
                 updateClient = function () { socket.emit('updatedrecords', records); },
-                getNs, getA, getCname, getMx, doResolve;
+                getNs, getA, getCname, getMx;
 
+            // promise constructor
             function getRecords(type, reference) {
                 var method = (type === 'NS') ? 'resolveNs' : 'resolve';
                 return function () {
@@ -43,7 +43,7 @@
                             if ( (!err) && (typeof results !== 'undefined') ) {
                                 records[reference] = results;
                             } else {
-                                records[reference] = ["No Records"];
+                                records[reference] = [ "No Records" ];
                             }
                             records[reference].sort();
                             dfd.resolve();
@@ -52,11 +52,13 @@
                 };
             }
 
+            // promises
             getNs = getRecords('NS','nameservers');
             getA = getRecords('A','arecords');
             getCname = getRecords('CNAME','crecords');
             getMx = getRecords('MX','mxrecords');
 
+            // whilst callback
             function doResolve (callback) {
                 Deferred.when(getNs(), getA(), getCname(), getMx())
                         .done(updateClient)
@@ -77,7 +79,7 @@
             }
         };
 
-    };
+    }
 
     module.exports = new DnsTools();
 
