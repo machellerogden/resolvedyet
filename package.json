@@ -7,22 +7,21 @@
         "type": "git",
         "url": "https://github.com/pixeldreamer/resolvedyet.git"
     },
-    "scripts": {
-        "start": "node app"
-    },
     "dependencies": {
-        "express": "3.0.6",
+        "express": "3.1.1",
         "jade": "*",
         "stylus": "*",
         "nib": "0.9.1",
-        "underscore": "1.4.3",
-        "async": "0.1.22",
-        "socket.io": "0.9.13",
-        "JQDeferred": "1.9.0"
+        "underscore": "1.4.4",
+        "async": "0.2.6",
+        "request": "2.16.6",
+        "socket.io": "0.9.14",
+        "moment": "2.0.0",
+        "JQDeferred": "1.9.1"
     },
     "files": [
         "app.js",
         "app/"
     ],
-    "engine": "node >= 0.8.18"
+    "engine": "node >= 0.10.3"
 }
