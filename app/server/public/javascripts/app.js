@@ -24,24 +24,24 @@ var DomainsViewModel = function () {
         if (key !== -1) {
 
             var current = results[key],
-                cn = current.nameservers.join(', '),
-                rn = result.nameservers.join(', '),
-                ca = current.arecords.join(', '),
-                ra = result.arecords.join(', '),
-                cc = current.crecords.join(', '),
-                rc = result.crecords.join(', '),
+                cn = current.NS.join(', '),
+                rn = result.NS.join(', '),
+                ca = current.A.join(', '),
+                ra = result.A.join(', '),
+                cc = current.CNAME.join(', '),
+                rc = result.CNAME.join(', '),
                 cm, rm;
 
-            if ( $.isString(current.mxrecords[0]) ) {
-                cm = current.mxrecords[0];
+            if ( $.isString(current.MX[0]) ) {
+                cm = current.MX[0];
             } else {
-                cm = $.map(current.mxrecords, function(i) { return JSON.stringify(i); }).join(', ');
+                cm = $.map(current.MX, function(i) { return JSON.stringify(i); }).join(', ');
             }
 
-            if ( $.isString(result.mxrecords[0]) ) {
-                rm = result.mxrecords[0];
+            if ( $.isString(result.MX[0]) ) {
+                rm = result.MX[0];
             } else {
-                rm = $.map(result.mxrecords, function(i) { return JSON.stringify(i); }).join(', ');
+                rm = $.map(result.MX, function(i) { return JSON.stringify(i); }).join(', ');
             }
 
             if ( ( cn === rn ) && ( !current.nschanged ) ) {
@@ -94,14 +94,15 @@ var DomainsViewModel = function () {
 
         } else {
 
-            result.nameserverText = result.nameservers.join(', ');
-            result.arecordsText = result.arecords.join(', ');
-            result.crecordsText = result.crecords.join(', ');
+            console.log('result: ', result);
+            result.nameserverText = result.NS.join(', ');
+            result.arecordsText = result.A.join(', ');
+            result.crecordsText = result.CNAME.join(', ');
 
-            if ( $.isString(result.mxrecords[0]) ) {
-                result.mxrecordsText = result.mxrecords[0];
+            if ( $.isString(result.MX[0]) ) {
+                result.mxrecordsText = result.MX[0];
             } else {
-                result.mxrecordsText = $.map(result.mxrecords, function(i) { return JSON.stringify(i); }).join(', ');
+                result.mxrecordsText = $.map(result.MX, function(i) { return JSON.stringify(i); }).join(', ');
             }
 
             result.ts = now;

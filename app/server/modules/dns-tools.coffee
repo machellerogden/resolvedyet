@@ -29,16 +29,12 @@ dnstools.getRecords = (domain, type, cb) ->
 dnstools.monitorLoop = (domain, socket, cb) ->
     records = {}
     records.domain = domain
-    await dnstools.getRecords domain, 'NS', defer nameservers
-    await dnstools.getRecords domain, 'A', defer arecords
-    await dnstools.getRecords domain, 'CNAME', defer crecords
-    await dnstools.getRecords domain, 'MX', defer mxrecords
-    records.nameservers = nameservers
-    records.arecords = arecords
-    records.crecords = crecords
-    records.mxrecords = mxrecords
+    types = [ 'NS', 'A', 'CNAME', 'MX' ]
+    await
+        for t,i in types
+            dnstools.getRecords domain, t, defer records[t]
     socket.emit 'updatedrecords', records
-    setTimeout cb, 15000
+    setTimeout cb, 150000
 
 dnstools.startMonitor = (domain) ->
     socket = @
