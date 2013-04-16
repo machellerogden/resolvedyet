@@ -4,7 +4,6 @@ module.exports = (app) ->
     stylus = require 'stylus'
     nib = require 'nib'
 
-    # configuration
     app.configure ->
         app.set 'port', process.env.PORT || 8080
         app.set 'views', app.root + '/app/server/views'
@@ -28,6 +27,5 @@ module.exports = (app) ->
         })
         app.use express.static(app.root + '/app/server/public')
 
-    # development configuration
     app.configure 'development', ->
         app.use express.errorHandler()

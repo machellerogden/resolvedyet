@@ -2,7 +2,10 @@
     "name": "resolvedyet",
     "description": "Realtime DNS Monitor built on Express and Socket.io",
     "author": "Mac Heller-Ogden <mac@machellerogden.com>",
-    "version": "0.0.11",
+    "version": "0.1.0",
+    "scripts": {
+        "start": "iced app.coffee"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/pixeldreamer/resolvedyet.git"
@@ -12,15 +15,10 @@
         "jade": "*",
         "stylus": "*",
         "nib": "0.9.1",
-        "underscore": "1.4.4",
-        "async": "0.2.6",
-        "request": "2.16.6",
-        "socket.io": "0.9.14",
-        "moment": "2.0.0",
-        "JQDeferred": "1.9.1"
+        "socket.io": "0.9.14"
     },
     "files": [
-        "app.js",
+        "app.coffee",
         "app/"
     ],
     "engine": "node >= 0.10.3"
