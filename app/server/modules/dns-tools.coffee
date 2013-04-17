@@ -1,44 +1,36 @@
 dns = require 'dns'
-dnstools = {}
 
-dnstools.connect = ->
-    @connected = true
+class DnsTools
+    constructor: ->
+        @connect = ->
+            @connected = true
+        @disconnect = ->
+            @connected = false
+        @startMonitor = (domain) ->
+            socket = @
+            processRecords = (records, err) ->
+                if ( (!err) && (typeof records != 'undefined') )
+                    records.sort()
+                else
+                    records = [ "No Records" ]
+            getRecords = (type, cb) ->
+                if type == 'NS'
+                    dns.resolveNs domain, (err, records) ->
+                        cb processRecords(records, err)
+                else
+                    dns.resolve domain, type, (err, records) ->
+                        cb processRecords(records, err)
+            monitorLoop = (cb) ->
+                records = {}
+                records.domain = domain
+                types = [ 'NS', 'A', 'CNAME', 'MX' ]
+                await
+                    for t in types
+                        getRecords t, defer records[t]
+                socket.emit 'updatedrecords', records
+                setTimeout cb, 150000
+            if domain
+                while socket.connected
+                    await monitorLoop defer()
 
-dnstools.disconnect = ->
-    @connected = false
-
-dnstools.processRecords = (records, err) ->
-    if ( (!err) && (typeof records != 'undefined') )
-        result = records
-    else
-        result = [ "No Records" ]
-    result.sort()
-
-dnstools.getRecords = (domain, type, cb) ->
-    if type == 'NS'
-        dns.resolveNs domain, (err, records) ->
-            result = dnstools.processRecords records, err
-            cb(result)
-    else
-        dns.resolve domain, type, (err, records) ->
-            result = dnstools.processRecords records, err
-            cb(result)
-
-dnstools.monitorLoop = (domain, socket, cb) ->
-    records = {}
-    records.domain = domain
-    types = [ 'NS', 'A', 'CNAME', 'MX' ]
-    # resolve in parallel
-    await
-        for t in types
-            dnstools.getRecords domain, t, defer records[t]
-    socket.emit 'updatedrecords', records
-    setTimeout cb, 150000
-
-dnstools.startMonitor = (domain) ->
-    socket = @
-    if domain
-        while socket.connected
-            await dnstools.monitorLoop domain, socket, defer()
-
-module.exports = dnstools
+module.exports = new DnsTools()
