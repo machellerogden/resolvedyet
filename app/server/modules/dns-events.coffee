@@ -1,8 +1,8 @@
 module.exports = (io) ->
 
-    dnstools = require './dns-tools'
+    dnsMonitor = require './dns-monitor'
 
     io.of('/resolvedyet').on 'connection', (socket) ->
-        socket.on 'startmonitor', dnstools.startMonitor
-        socket.on 'connect', dnstools.connect
-        socket.on 'disconnect', dnstools.disconnect
+        socket.on 'startmonitor', dnsMonitor.start
+        socket.on 'connect', dnsMonitor.connect
+        socket.on 'disconnect', dnsMonitor.disconnect

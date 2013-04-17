@@ -14,66 +14,69 @@
         return socket.emit('startmonitor', this.domainQuery());
       };
       this.addResult = function() {
-        var ca, cc, cm, cn, current, key, now, ra, rc, result, results, rm, rn;
+        var current, k, key, now, result, results, rm, v, _i, _len;
         results = this.allResults();
         result = this.resultToAdd();
-        key = $.indexOf(this.allDomains(), result.domain);
         now = $.moment().format('h:mma');
+        key = $.indexOf(this.allDomains(), result.domain);
         if (key !== -1) {
           current = results[key];
-          cn = current.NS.join(', ');
-          rn = result.NS.join(', ');
-          ca = current.A.join(', ');
-          ra = result.A.join(', ');
-          cc = current.CNAME.join(', ');
-          rc = result.CNAME.join(', ');
-          if ($.isString(current.MX[0])) {
-            cm = current.MX[0];
-          } else {
-            cm = $.map(current.MX, function(i) {
-              return JSON.stringify(i);
-            }).join(', ');
+          for (v = _i = 0, _len = current.length; _i < _len; v = ++_i) {
+            k = current[v];
+            if (k === 'domain') return;
+            if (k === 'mx') {
+              if ($.isString(v[0])) {
+                current[k] = v[0];
+              } else {
+                current[k] = $.map(v, function(i) {
+                  return JSON.stringify(i);
+                }).join(', ');
+              }
+              if ($.isString(result[k][0])) {
+                result[k] = result[k][0];
+              } else {
+                rm = $.map(result.mx, function(i) {
+                  return JSON.stringify(i);
+                }).join(', ');
+              }
+            } else {
+              current[k] = v.join(', ');
+              result[k] = v.join(', ');
+            }
           }
-          if ($.isString(result.MX[0])) {
-            rm = result.MX[0];
-          } else {
-            rm = $.map(result.MX, function(i) {
-              return JSON.stringify(i);
-            }).join(', ');
-          }
-          if ((cn === rn) && (!current.nschanged)) {
-            result.nameserverText = cn;
-            result.nscls = current.nscls;
+          if ((current.ns === result.ns) && (!current.nschanged)) {
+            result.nameserverText = current.ns;
             result.nschanged = false;
+            result.nscls = current.nscls;
           } else {
-            result.nameserverText = rn;
+            result.nameserverText = result.ns;
             result.nschanged = true;
             result.nscls = 'listing changed';
           }
-          if ((ca === ra) && (!current.achanged)) {
-            result.arecordsText = ca;
-            result.acls = current.acls;
+          if ((current.a === result.a) && (!current.achanged)) {
+            result.arecordsText = current.a;
             result.achanged = false;
+            result.acls = current.acls;
           } else {
-            result.arecordsText = ra;
+            result.arecordsText = result.a;
             result.achanged = true;
             result.acls = 'listing changed';
           }
-          if ((cc === rc) && (!current.cchanged)) {
-            result.crecordsText = cc;
-            result.ccls = current.ccls;
+          if ((current.cname === result.cname) && (!current.cchanged)) {
+            result.crecordsText = current.cname;
             result.cchanged = false;
+            result.ccls = current.ccls;
           } else {
-            result.crecordsText = rc;
+            result.crecordsText = result.cname;
             result.cchanged = true;
             result.ccls = 'listing changed';
           }
-          if ((cm === rm) && (!current.mxchanged)) {
-            result.mxrecordsText = cm;
-            result.mxcls = current.mxcls;
+          if ((current.mx === result.mx) && (!current.mxchanged)) {
+            result.mxrecordsText = current.mx;
             result.mxchanged = false;
+            result.mxcls = current.mxcls;
           } else {
-            result.mxrecordsText = rm;
+            result.mxrecordsText = result.mx;
             result.mxchanged = true;
             result.mxcls = 'listing changed';
           }
@@ -87,14 +90,13 @@
           results[key] = result;
           this.allResults(results);
         } else {
-          console.log('result: ', result);
-          result.nameserverText = result.NS.join(', ');
-          result.arecordsText = result.A.join(', ');
-          result.crecordsText = result.CNAME.join(', ');
-          if ($.isString(result.MX[0])) {
-            result.mxrecordsText = result.MX[0];
+          result.nameserverText = result.ns.join(', ');
+          result.arecordsText = result.a.join(', ');
+          result.crecordsText = result.cname.join(', ');
+          if ($.isString(result.mx[0])) {
+            result.mxrecordsText = result.mx[0];
           } else {
-            result.mxrecordsText = $.map(result.MX, function(i) {
+            result.mxrecordsText = $.map(result.mx, function(i) {
               return JSON.stringify(i);
             }).join(', ');
           }
