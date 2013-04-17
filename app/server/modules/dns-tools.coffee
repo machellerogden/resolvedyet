@@ -30,7 +30,7 @@ dnstools.monitorLoop = (domain, socket, cb) ->
     types = [ 'NS', 'A', 'CNAME', 'MX' ]
     # resolve in parallel
     await
-        for t,i in types
+        for t in types
             dnstools.getRecords domain, t, defer records[t]
     socket.emit 'updatedrecords', records
     setTimeout cb, 150000
