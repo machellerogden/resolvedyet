@@ -4,7 +4,6 @@ class DnsMonitor
 
     constructor: ->
 
-
         # socket event - connect
         @connect = ->
             # set socket.connected to true on connect

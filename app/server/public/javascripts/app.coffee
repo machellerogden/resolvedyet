@@ -24,6 +24,8 @@ class DomainsViewModel
             # reference to results
             results = @allResults()
 
+            console.log 'results #{results}'
+
             # reference to result to add
             result = @resultToAdd()
 
