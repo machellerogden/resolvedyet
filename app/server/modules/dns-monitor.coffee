@@ -4,7 +4,6 @@ class DnsMonitor
 
     constructor: ->
 
-
         # socket event - connect
         @connect = ->
             # set socket.connected to true on connect
@@ -16,7 +15,7 @@ class DnsMonitor
             @connected = false
 
         # socket event - start
-        @start = (domain) ->
+        @start = (domain, pollingrate) ->
 
             # socket reference
             socket = @
@@ -29,8 +28,8 @@ class DnsMonitor
                     records.sort()
                 # otherwise...
                 else
-                    # ...set to `[ "No Records" ]`
-                    records = [ "No Records" ]
+                    # ...set as empty array
+                    records = []
 
             # method - get records
             getRecords = (type, cb) ->
@@ -62,9 +61,10 @@ class DnsMonitor
                         # get records for each type with deferred as callback
                         getRecords t, defer records[t]
                 # when done, socket.emit records to client
+                console.log('updatedrecords: ', records);
                 socket.emit 'updatedrecords', records
-                # do this again in 2.5 minutes
-                setTimeout cb, 150000
+                # do this again in however many minutes
+                setTimeout cb, pollingrate
 
             # execute - if domain isn't falsy...
             if domain
@@ -73,5 +73,5 @@ class DnsMonitor
                     # ...start the monitor loop
                     await monitorLoop defer()
 
-# export new instance of DnsMonitor
+# export DnsMonitor
 module.exports = new DnsMonitor()

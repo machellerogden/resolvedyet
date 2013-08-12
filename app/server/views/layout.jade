@@ -6,9 +6,7 @@ html
         link(href="/stylesheets/style.css", rel="stylesheet", type="text/css")
         link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
         link(rel="icon", href="/favicon.ico", type="image/x-icon")
-        script(src="/socket.io/socket.io.js")
-        script(src="/javascripts/ender.js")
-        script(src="/javascripts/app.js")
+        script(data-main="javascripts/app", src="javascripts/require.js")
     body
         #wrapper
             #header

@@ -37,25 +37,25 @@ block content
             span.listing(data-bind="attr: {class: nscls}")
                 span.indicator-outer
                   span.indicator-inner
-                span.text.ns(data-bind="text: nameserverText")
+                span.text.ns(data-bind="text: ns")
             h3
                 | A Records
             span.listing(data-bind="attr: {class: acls}")
                 span.indicator-outer
                   span.indicator-inner
-                span.text.a(data-bind="text: arecordsText")
+                span.text.a(data-bind="text: a")
             h3
                 | CNAME Records
-            span.listing(data-bind="attr: {class: ccls}")
+            span.listing(data-bind="attr: {class: cnamecls}")
                 span.indicator-outer
                   span.indicator-inner
-                span.text.cname(data-bind="text: crecordsText")
+                span.text.cname(data-bind="text: cname")
             h3
                 | MX Records
             span.listing(data-bind="attr: {class: mxcls}")
                 span.indicator-outer
                   span.indicator-inner
-                span.text.mx(data-bind="text: mxrecordsText")
+                span.text.mx(data-bind="text: mx")
             span.status
                 span.label
                     | Status: 
