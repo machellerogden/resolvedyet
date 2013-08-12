@@ -134,7 +134,7 @@ require(["/socket.io/socket.io.js", "ender"], function () {
     }
 
     // on document ready...
-    $.domReady(function() {
+    $.domReady(function () {
 
         var domainsModel;
 
