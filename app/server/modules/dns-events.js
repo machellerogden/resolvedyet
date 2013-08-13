@@ -1,4 +1,4 @@
-module.exports = function() {
+module.exports = (function () {
 
     var dnsMonitor = require('./dns-monitor');
 
@@ -8,4 +8,4 @@ module.exports = function() {
         socket.on('disconnect', dnsMonitor.disconnect);
     });
 
-}();
+}());

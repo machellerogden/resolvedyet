@@ -1,8 +1,7 @@
-var app, express, http, server;
-express = require('express');
-http = require('http');
-app = express();
-server = http.createServer(app);
+var express = require('express'),
+    http = require('http'),
+    app = express(),
+    server = http.createServer(app);
 
 app.root = __dirname;
 
