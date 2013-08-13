@@ -4,7 +4,7 @@
     "author": "Mac Heller-Ogden <mac@machellerogden.com>",
     "version": "0.1.0",
     "scripts": {
-        "start": "iced app.coffee"
+        "start": "node app.js"
     },
     "repository": {
         "type": "git",
@@ -15,10 +15,12 @@
         "jade": "*",
         "stylus": "*",
         "nib": "0.9.1",
-        "socket.io": "0.9.14"
+        "socket.io": "0.9.14",
+        "coffee-script": "1.6.3",
+        "iced-coffee-script": "1.6.3-e"
     },
     "files": [
-        "app.coffee",
+        "app.js",
         "app/"
     ],
     "engine": "node >= 0.10.3"
