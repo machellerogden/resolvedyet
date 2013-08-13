@@ -12,7 +12,7 @@ module.exports = function (app) {
         app.use(express.logger('dev'));
         app.use(express.bodyParser());
         app.use(express.methodOverride());
-        app.use(express.cookieParser('changeToSomethingMoreSecure'));
+        app.use(express.cookieParser('k$5^8nOA9DmCxT@9ti2FbVg4JZ1#g0B$'));
         app.use(express.session());
         app.use(app.router);
         app.use(stylus.middleware({
